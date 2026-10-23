@@ -30,7 +30,7 @@ ZMK Studio currently has the following capabilities:
 |   ❌   | Defining new behaviors not specified in devicetree                                                                                        |
 |   💡   | Configuring [combos](../keymaps/combos.md)                                                                                                |
 |   💡   | Configuring [conditional layers](../keymaps/conditional-layers.md)                                                                        |
-|   🕯️   | Assigning behaviors to encoders                                                                                                           |
+|   🚧   | Assigning behaviors to [encoders](#encoder-bindings)                                                                                      |
 |   ✅   | Selecting alternative pre-defined physical layouts for the keyboard                                                                       |
 |   ❌   | Defining new physical layouts for the keyboard                                                                                            |
 |   ✅   | Renaming layers & enabling [extra layers](#including-extra-layers)                                                                        |
@@ -51,6 +51,10 @@ Once using ZMK Studio to manage your keymap, any future changes made to the `.ke
 Generally, if you intend to use ZMK Studio, then you should not make any further changes to the `.keymap` file (with the exception of adding new empty layers to then use within ZMK Studio).
 
 :::
+
+## Encoder Bindings
+
+The firmware can report and change the behavior bound to each [encoder](encoders.md) on each layer, though the ZMK Studio UI doesn't offer this yet. An encoder can be bound to a sensor rotation behavior such as [`&inc_dec_kp`](encoders.md), choosing the key sent for each direction, or to any [sensor rotation behavior](../keymaps/behaviors/sensor-rotate.md) defined in your keymap. Clearing an encoder's binding makes its rotation fall through to the next active layer, like [`&trans`](../keymaps/behaviors/misc.md#transparent) does for keys.
 
 ## Accessing ZMK Studio
 
