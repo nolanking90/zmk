@@ -634,17 +634,14 @@ static int keymap_track_changed_bindings(const char *key, size_t len, settings_r
         uint8_t(*state)[ZMK_KEYMAP_LAYERS_LEN][PENDING_ARRAY_SIZE] =
             (uint8_t(*)[ZMK_KEYMAP_LAYERS_LEN][PENDING_ARRAY_SIZE])param;
         char *endptr;
-        uint8_t layer = strtoul(next, &endptr, 10);
-        if (*endptr != '/') {
-            LOG_WRN("Invalid layer number: %s with endptr %s", next, endptr);
-            return -EINVAL;
-        }
+        uint32_t layer = strtoul(next, &endptr, 10);
+        uint32_t key_position = *endptr == '/' ? strtoul(endptr + 1, &endptr, 10) : UINT32_MAX;
 
-        uint32_t key_position = strtoul(endptr + 1, &endptr, 10);
-
-        if (*endptr != '\0') {
-            LOG_WRN("Invalid key_position number: %s with endptr %s", next, endptr);
-            return -EINVAL;
+        // Skip (don't fail on) stale or malformed keys, e.g. after flashing firmware with fewer
+        // layers or keys: an error would stop the walk and leave other bindings undeleted.
+        if (*endptr != '\0' || layer >= ZMK_KEYMAP_LAYERS_LEN || key_position >= ZMK_KEYMAP_LEN) {
+            LOG_WRN("Skipping invalid key binding setting: %s", next);
+            return 0;
         }
 
         WRITE_BIT((*state)[layer][key_position / 8], key_position % 8, 1);
@@ -668,11 +665,6 @@ int zmk_keymap_reset_settings(void) {
         uint8_t *changes = zmk_keymap_layer_changes[l];
 
         for (int k = 0; k < ZMK_KEYMAP_LEN; k++) {
-            if (memcmp(&zmk_keymap[l][k], &zmk_stock_keymap[l][k],
-                       sizeof(struct zmk_behavior_binding_setting)) == 0) {
-                continue;
-            }
-
             if (changes[k / 8] & BIT(k % 8)) {
                 LOG_WRN("CLEAR %d on %d layer", k, l);
                 char setting_name[20];
