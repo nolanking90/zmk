@@ -46,6 +46,20 @@ const char *zmk_keymap_layer_name(zmk_keymap_layer_id_t layer);
 
 const struct zmk_behavior_binding *zmk_keymap_get_layer_binding_at_idx(zmk_keymap_layer_id_t layer,
                                                                        uint8_t binding_idx);
+/**
+ * Sensor (e.g. rotary encoder) binding for `sensor_index` on `layer`, or NULL if the keymap
+ * has no such sensor.
+ */
+const struct zmk_behavior_binding *
+zmk_keymap_get_layer_sensor_binding(zmk_keymap_layer_id_t layer, uint8_t sensor_index);
+
+/**
+ * Replace the sensor binding for `sensor_index` on `layer`. Like key bindings, the change is
+ * pending until zmk_keymap_save_changes() / zmk_keymap_discard_changes().
+ */
+int zmk_keymap_set_layer_sensor_binding(zmk_keymap_layer_id_t layer, uint8_t sensor_index,
+                                        struct zmk_behavior_binding binding);
+
 int zmk_keymap_set_layer_binding_at_idx(zmk_keymap_layer_id_t layer, uint8_t binding_idx,
                                         const struct zmk_behavior_binding binding);
 
