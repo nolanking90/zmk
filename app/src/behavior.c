@@ -265,7 +265,7 @@ int zmk_behavior_validate_binding(const struct zmk_behavior_binding *binding) {
 
 zmk_behavior_local_id_t zmk_behavior_get_local_id(const char *name) {
     if (!name) {
-        return UINT16_MAX;
+        return ZMK_BEHAVIOR_LOCAL_ID_NONE;
     }
 
     STRUCT_SECTION_FOREACH(zmk_behavior_local_id_map, item) {
@@ -274,7 +274,7 @@ zmk_behavior_local_id_t zmk_behavior_get_local_id(const char *name) {
         }
     }
 
-    return UINT16_MAX;
+    return ZMK_BEHAVIOR_LOCAL_ID_NONE;
 }
 
 const char *zmk_behavior_find_behavior_name_from_local_id(zmk_behavior_local_id_t local_id) {

@@ -13,6 +13,9 @@
 
 typedef uint16_t zmk_behavior_local_id_t;
 
+/** Local ID meaning "no behavior", e.g. a cleared sensor binding stored in settings. */
+#define ZMK_BEHAVIOR_LOCAL_ID_NONE UINT16_MAX
+
 struct zmk_behavior_binding {
 #if IS_ENABLED(CONFIG_ZMK_BEHAVIOR_LOCAL_IDS_IN_BINDINGS)
     zmk_behavior_local_id_t local_id;
@@ -64,7 +67,8 @@ int zmk_behavior_invoke_binding(const struct zmk_behavior_binding *src_binding,
  * @param name Behavior name to search for.
  *
  * @retval The local ID value that can be used to reference the behavior later, across reboots.
- * @retval UINT16_MAX if the behavior is not found or its initialization function failed.
+ * @retval ZMK_BEHAVIOR_LOCAL_ID_NONE if the behavior is not found or its initialization function
+ *         failed.
  */
 zmk_behavior_local_id_t zmk_behavior_get_local_id(const char *name);
 
