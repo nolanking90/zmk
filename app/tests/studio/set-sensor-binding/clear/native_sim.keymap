@@ -1,0 +1,18 @@
+#include "../behavior_keymap.dtsi"
+
+// With the upper layer on, its sensor binding (E/F) wins; once cleared, rotation falls
+// through to the default layer (A/B). The encoder turns at 200 and 400ms.
+&kscan {
+    events = <
+    ZMK_MOCK_PRESS(0,1,10)
+    ZMK_MOCK_RELEASE(0,1,290)
+    ZMK_MOCK_PRESS(1,0,10)
+    ZMK_MOCK_RELEASE(1,0,300)
+    ZMK_MOCK_PRESS(2,1,10)
+    ZMK_MOCK_RELEASE(2,1,10)
+    >;
+};
+
+&mock_encoder {
+    events = <18 18>;
+};

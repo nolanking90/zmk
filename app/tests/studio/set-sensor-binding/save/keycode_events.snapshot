@@ -1,0 +1,7 @@
+pressed: usage_page 0x07 keycode 0x04 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x04 implicit_mods 0x00 explicit_mods 0x00
+set_sensor_binding: Set sensor binding at layer 0, sensor 0 to binding 1/1
+keymap_changes: Keymap changes operation 1 done
+keymap_changes: Keymap changes operation 0 done
+pressed: usage_page 0x07 keycode 0x06 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x06 implicit_mods 0x00 explicit_mods 0x00

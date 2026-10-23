@@ -1,0 +1,11 @@
+# Copyright (c) 2026 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+description: |
+  Keymap changes behavior. The parameter selects the operation:
+  0 = discard pending changes, 1 = save changes, 2 = reset to stock settings,
+  3 = store key and sensor binding settings for an out of range layer (stale settings).
+
+compatible: "zmk,behavior-keymap-changes"
+
+include: one_param.yaml

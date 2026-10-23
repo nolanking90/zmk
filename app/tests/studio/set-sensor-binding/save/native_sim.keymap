@@ -1,0 +1,30 @@
+#include "../behavior_keymap.dtsi"
+
+// A saved sensor binding is loaded back from settings: set C/D, save, then discard (which
+// reloads the keymap from settings). The encoder turns at 200 and 400ms.
+&default_layer {
+    bindings = <
+        &set_sensor_binding 0 0 &keymap_changes 1
+        &keymap_changes 0 &none
+        &none &none
+    >;
+};
+
+&kscan {
+    events = <
+    ZMK_MOCK_PRESS(2,0,150)
+    ZMK_MOCK_RELEASE(2,0,0)
+    ZMK_MOCK_PRESS(0,0,10)
+    ZMK_MOCK_RELEASE(0,0,10)
+    ZMK_MOCK_PRESS(0,1,10)
+    ZMK_MOCK_RELEASE(0,1,10)
+    ZMK_MOCK_PRESS(1,0,10)
+    ZMK_MOCK_RELEASE(1,0,300)
+    ZMK_MOCK_PRESS(2,1,10)
+    ZMK_MOCK_RELEASE(2,1,10)
+    >;
+};
+
+&mock_encoder {
+    events = <18 18>;
+};

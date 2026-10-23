@@ -1,0 +1,75 @@
+#include <dt-bindings/zmk/keys.h>
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/kscan_mock.h>
+
+/ {
+    behaviors {
+        set_sensor_binding: set_sensor_binding {
+            compatible = "zmk,behavior-set-layer-sensor-binding";
+            #binding-cells = <2>;
+            sensor-bindings = <&inc_dec_kp C D>;
+        };
+
+        clear_sensor_binding: clear_sensor_binding {
+            compatible = "zmk,behavior-set-layer-sensor-binding";
+            #binding-cells = <2>;
+            sensor-bindings = <&inc_dec_kp C D>;
+            clear;
+        };
+
+        keymap_changes: keymap_changes {
+            compatible = "zmk,behavior-keymap-changes";
+            #binding-cells = <1>;
+        };
+
+        set_binding: set_binding {
+            compatible = "zmk,behavior-set-layer-binding-at-idx";
+            #binding-cells = <2>;
+            bindings = <&kp G>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer: default_layer {
+            bindings = <
+                &set_sensor_binding 0 0 &tog 1
+                &clear_sensor_binding 1 0 &keymap_changes 0
+                &none &none
+            >;
+            sensor-bindings = <&inc_dec_kp A B>;
+        };
+
+        upper_layer {
+            bindings = <
+                &trans &trans
+                &trans &trans
+                &trans &trans
+            >;
+            sensor-bindings = <&inc_dec_kp E F>;
+        };
+    };
+
+    mock_encoder: mock_encoder {
+        compatible = "zmk,sensor-encoder-mock";
+        status = "okay";
+        event-startup-delay = <200>;
+        event-period = <200>;
+    };
+
+    sensors: sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&mock_encoder>;
+        triggers-per-rotation = <20>;
+    };
+};
+
+// Row 2 holds &none keys, used as no-op events to wait before acting. Each mock event fires
+// after the previous event's delay, and the test ends after the last event.
+// &keymap_changes takes 0 to discard, 1 to save, 2 to reset settings, or 3 to store stale
+// key and sensor settings.
+&kscan {
+    rows = <3>;
+    columns = <2>;
+};

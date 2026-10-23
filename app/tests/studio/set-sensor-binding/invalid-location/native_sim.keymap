@@ -1,0 +1,26 @@
+#include "../behavior_keymap.dtsi"
+
+// Out of range layer and sensor indexes are rejected; the stock binding still applies.
+&default_layer {
+    bindings = <
+        &set_sensor_binding 9 0 &set_sensor_binding 0 5
+        &none &none
+        &none &none
+    >;
+};
+
+// The encoder turns at 200ms.
+&kscan {
+    events = <
+    ZMK_MOCK_PRESS(0,0,10)
+    ZMK_MOCK_RELEASE(0,0,10)
+    ZMK_MOCK_PRESS(0,1,10)
+    ZMK_MOCK_RELEASE(0,1,300)
+    ZMK_MOCK_PRESS(2,1,10)
+    ZMK_MOCK_RELEASE(2,1,10)
+    >;
+};
+
+&mock_encoder {
+    events = <18>;
+};

@@ -1,0 +1,3 @@
+s/.*on_set_layer_sensor_binding_pressed/set_sensor_binding/p
+s/.*on_keymap_changes_binding_pressed/keymap_changes/p
+s/.*hid_listener_keycode_//p

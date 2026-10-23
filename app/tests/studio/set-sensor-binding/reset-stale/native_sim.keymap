@@ -1,0 +1,36 @@
+#include "../behavior_keymap.dtsi"
+
+// Stale key and sensor settings (for a layer this firmware doesn't have) must not stop a
+// settings reset from deleting saved key bindings. Key 5 is changed from X to G and saved,
+// stale settings are stored, then reset and discard reload the keymap: key 5 must be X again.
+// The encoder turns at 200ms, after the last key press.
+&default_layer {
+    bindings = <
+        &set_binding 0 5 &keymap_changes 1
+        &keymap_changes 3 &keymap_changes 2
+        &keymap_changes 0 &kp X
+    >;
+};
+
+&kscan {
+    events = <
+    ZMK_MOCK_PRESS(0,0,10)
+    ZMK_MOCK_RELEASE(0,0,10)
+    ZMK_MOCK_PRESS(0,1,10)
+    ZMK_MOCK_RELEASE(0,1,10)
+    ZMK_MOCK_PRESS(1,0,10)
+    ZMK_MOCK_RELEASE(1,0,10)
+    ZMK_MOCK_PRESS(1,1,10)
+    ZMK_MOCK_RELEASE(1,1,10)
+    ZMK_MOCK_PRESS(2,0,10)
+    ZMK_MOCK_RELEASE(2,0,10)
+    ZMK_MOCK_PRESS(2,1,10)
+    ZMK_MOCK_RELEASE(2,1,300)
+    ZMK_MOCK_PRESS(2,0,10)
+    ZMK_MOCK_RELEASE(2,0,10)
+    >;
+};
+
+&mock_encoder {
+    events = <18>;
+};

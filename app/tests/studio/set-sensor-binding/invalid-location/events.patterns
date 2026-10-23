@@ -1,0 +1,2 @@
+s/.*\(Failed to set sensor binding\)/set_sensor_binding: \1/p
+s/.*hid_listener_keycode_//p

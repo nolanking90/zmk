@@ -1,0 +1,31 @@
+#include "../behavior_keymap.dtsi"
+
+// A saved cleared sensor binding stays cleared after reloading from settings, so rotation
+// still falls through from the upper layer (E/F) to the default layer (A/B).
+// The encoder turns at 200 and 400ms.
+&default_layer {
+    bindings = <
+        &tog 1 &keymap_changes 1
+        &keymap_changes 0 &clear_sensor_binding 1 0
+        &none &none
+    >;
+};
+
+&kscan {
+    events = <
+    ZMK_MOCK_PRESS(0,0,10)
+    ZMK_MOCK_RELEASE(0,0,290)
+    ZMK_MOCK_PRESS(1,1,10)
+    ZMK_MOCK_RELEASE(1,1,10)
+    ZMK_MOCK_PRESS(0,1,10)
+    ZMK_MOCK_RELEASE(0,1,10)
+    ZMK_MOCK_PRESS(1,0,10)
+    ZMK_MOCK_RELEASE(1,0,300)
+    ZMK_MOCK_PRESS(2,1,10)
+    ZMK_MOCK_RELEASE(2,1,10)
+    >;
+};
+
+&mock_encoder {
+    events = <18 18>;
+};

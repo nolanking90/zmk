@@ -1,0 +1,18 @@
+#include "../behavior_keymap.dtsi"
+
+// Rotate with the stock binding (A/B), replace it with C/D, then rotate again.
+// The encoder turns at 200, 400, 600 and 800ms; the binding is replaced at 500ms.
+&kscan {
+    events = <
+    ZMK_MOCK_PRESS(2,0,250)
+    ZMK_MOCK_RELEASE(2,0,0)
+    ZMK_MOCK_PRESS(0,0,10)
+    ZMK_MOCK_RELEASE(0,0,500)
+    ZMK_MOCK_PRESS(2,1,10)
+    ZMK_MOCK_RELEASE(2,1,10)
+    >;
+};
+
+&mock_encoder {
+    events = <18 (-18) 18 (-18)>;
+};

@@ -1,0 +1,4 @@
+set_sensor_binding: Failed to set sensor binding at layer 9, sensor 0 (err: -22)
+set_sensor_binding: Failed to set sensor binding at layer 0, sensor 5 (err: -22)
+pressed: usage_page 0x07 keycode 0x04 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x04 implicit_mods 0x00 explicit_mods 0x00

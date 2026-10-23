@@ -1,0 +1,16 @@
+# Copyright (c) 2026 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+description: Layer Sensor Binding Setter Behavior
+
+compatible: "zmk,behavior-set-layer-sensor-binding"
+
+include: two_param.yaml
+
+properties:
+  sensor-bindings:
+    type: phandle-array
+    required: true
+  clear:
+    type: boolean
+    description: Clear the sensor binding instead of setting one from sensor-bindings
