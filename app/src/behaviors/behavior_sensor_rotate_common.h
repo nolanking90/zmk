@@ -19,6 +19,11 @@ struct behavior_sensor_rotate_config {
 struct behavior_sensor_rotate_data {
     struct sensor_value remainder[ZMK_KEYMAP_SENSORS_LEN][ZMK_KEYMAP_LAYERS_LEN];
     int triggers[ZMK_KEYMAP_SENSORS_LEN][ZMK_KEYMAP_LAYERS_LEN];
+#if IS_ENABLED(CONFIG_ZMK_BEHAVIOR_METADATA)
+    // Only filled in by sensor-rotate-var, but kept here so both drivers share one data struct
+    // with the common accept/process functions.
+    struct behavior_parameter_metadata_set set;
+#endif // IS_ENABLED(CONFIG_ZMK_BEHAVIOR_METADATA)
 };
 
 int zmk_behavior_sensor_rotate_common_accept_data(
